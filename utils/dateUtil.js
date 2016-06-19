@@ -2,7 +2,6 @@ module.exports = {
     formatDate(date) {
         const month = this.getDoubleDigitString(date.getMonth() + 1);
         const day = this.getDoubleDigitString(date.getDate());
-        console.log(`${date.getFullYear()}-${month}-${day}`);
         return `${date.getFullYear()}-${month}-${day}`;
     },
     getToday() {

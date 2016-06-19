@@ -12,11 +12,11 @@ mongoose.connect(config.dbUrl);
 db.on('error', () => {
     console.error('Could not connect to database ' + config.dbUrl);
 });
-db.once('open', () => {
-    console.log('Connected to database');
-});
 
-app.use(morgan('dev'));
+if (config.env !== 'test') {
+    app.use(morgan('dev'));
+}
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
@@ -37,3 +37,5 @@ app.get('/', (req, res) => {
 app.listen(config.port, () => {
     console.log(`Serving on port ${config.port} in ${config.env}`);
 });
+
+module.exports = app;

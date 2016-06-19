@@ -6,6 +6,12 @@ module.exports = ENV => {
                 env: 'production',
                 dbUrl: process.env.DATABASE_URL
             };
+        case 'test':
+            return {
+                port: 8080,
+                env: 'test',
+                dbUrl: 'mongodb://localhost:27017/alexkott-test',
+            };
         case 'development':
         default:
             return {
