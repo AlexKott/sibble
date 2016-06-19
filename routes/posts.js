@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const dateUtil = require('../utils/dateUtil');
+const slugUtil = require('../utils/slugUtil');
 const router = require('express').Router();
 const Post = require('../models/post');
 
@@ -18,6 +19,9 @@ router.route('/posts')
         if (!_.get(newPost, 'attributes.dateCreated')) {
             newPost.attributes.dateCreated = dateUtil.getToday();
         }
+        newPost.id = slugUtil.generateSlug(
+             newPost.attributes.title,
+             newPost.attributes.dateCreated);
 
         newPost.save((err, data) => {
             if (err) {

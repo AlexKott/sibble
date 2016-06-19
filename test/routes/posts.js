@@ -17,7 +17,7 @@ describe('POST /api/posts', () => {
     describe('date handling', () => {
         it('should set the current date if none is provided', (done) => {
             const today = dateUtil.getToday();
-            const newPost = { data: { attributes: { title: 'test post' }}};
+            const newPost = { data: { attributes: { title: 'test post one' }}};
 
             request.post('/api/posts')
                 .send(newPost)
@@ -31,7 +31,7 @@ describe('POST /api/posts', () => {
             const newPost = { data: {
                 attributes: {
                     dateCreated: '2016-01-10',
-                    title: 'test post'
+                    title: 'test post two'
             }}};
 
             request.post('/api/posts')
@@ -39,6 +39,24 @@ describe('POST /api/posts', () => {
                 .expect(201)
                 .end((err, data) => {
                     assert.equal(data.body.data.attributes.dateCreated, '2016-01-10');
+                    done();
+                });
+        });
+    });
+    describe('generating slugs', () => {
+        it('should create a new slug for posts', (done) => {
+            const newPost = { data: {
+                attributes: {
+                    dateCreated: '2000-01-12',
+                    title: 'test post three'
+            }}};
+            const slug = 'test-post-three_2000-01-12';
+
+            request.post('/api/posts')
+                .send(newPost)
+                .expect(201)
+                .end((err, data) => {
+                    assert.equal(data.body.data.id, slug);
                     done();
                 });
         });
