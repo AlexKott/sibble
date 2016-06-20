@@ -21,18 +21,38 @@ router.route('/posts')
         }
         newPost.id = slugUtil.generateSlug(
              newPost.attributes.title,
-             newPost.attributes.dateCreated);
+             newPost.attributes.dateCreated
+         );
 
-        newPost.save((err, data) => {
-            if (err) {
-                return res.status(500).send({ errors: [{ detail: err }]});
-            }
-            res.status(201).send({ data: data });
+        const validatePost = new Promise((resolve, reject) => {
+            Post.findOne({ id: newPost.id }, (err, data) => {
+                if (data) {
+                    reject();
+                } else {
+                    resolve();
+                }
+            });
+        });
+
+        validatePost.then(() => {
+            newPost.save((err, data) => {
+                if (err) {
+                    return res.status(500).send({ errors: [{ detail: err }]});
+                }
+                res.status(201).send({ data: data });
+            });
+        }).catch(() => {
+            return res.status(409).send({ errors: [{ detail: 'Post already exists! '}]});
         });
     });
 router.route('/posts/:id')
     .get((req, res) => {
-
+        Post.findOne({ id: req.params.id }, (err, data) => {
+            if (err) {
+                res.status(500).send({ errors: [{ detail: err }]});
+            }
+            res.send({ data: data });
+        })
     })
     .patch((req, res) => {
 
