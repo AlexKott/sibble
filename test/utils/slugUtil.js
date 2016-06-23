@@ -18,4 +18,11 @@ describe('slugUtil', () => {
 
         assert.equal(slugUtil.generateSlug(title, date), slug);
     });
+    it('should lowercase the slug', () => {
+        const title = 'TesT TITLE thrEE';
+        const date = '2000-03-10';
+        const slug = 'test-title-three_2000-03-10';
+
+        assert.equal(slugUtil.generateSlug(title, date), slug);
+    });
 });

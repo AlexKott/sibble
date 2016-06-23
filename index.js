@@ -10,7 +10,7 @@ const db = mongoose.connection;
 mongoose.connect(config.dbUrl);
 
 db.on('error', () => {
-    console.error('Could not connect to database ' + config.dbUrl);
+    console.error(`Could not connect to database ${config.dbUrl}`); // eslint-disable-line
 });
 
 if (config.env !== 'test') {
@@ -25,9 +25,9 @@ app.use('/api', posts);
 
 app.get('*', (req, res, next) => {
     if (config.env === 'production' && req.get('X-Forwarded-Proto') === 'http') {
-        return res.redirect('https://' + req.hostname + req.originalUrl);
+        return res.redirect(`https://${req.hostname}${req.originalUrl}`);
     }
-    next();
+    return next();
 });
 
 app.get('/', (req, res) => {
@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(config.port, () => {
-    console.log(`Serving on port ${config.port} in ${config.env}`);
+    console.log(`Serving on port ${config.port} in ${config.env}`); // eslint-disable-line
 });
 
 module.exports = app;

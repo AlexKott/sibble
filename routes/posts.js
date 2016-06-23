@@ -1,16 +1,18 @@
 const _ = require('lodash');
 const dateUtil = require('../utils/dateUtil');
 const slugUtil = require('../utils/slugUtil');
-const router = require('express').Router();
+const router = require('express').Router(); // eslint-disable-line
 const Post = require('../models/post');
 
 router.route('/posts')
     .get((req, res) => {
         Post.find({}, (err, posts) => {
             if (err) {
-                return res.status(500).send({ errors: [{ detail: err }]});
+                return res.status(500).send({ errors: [{ detail: err }] });
+            } else if (posts.length === 0) {
+                return res.status(204).send();
             }
-            res.send({ data: posts });
+            return res.send({ data: posts });
         });
     })
     .post((req, res) => {
@@ -37,28 +39,48 @@ router.route('/posts')
         validatePost.then(() => {
             newPost.save((err, data) => {
                 if (err) {
-                    return res.status(500).send({ errors: [{ detail: err }]});
+                    return res.status(500).send({ errors: [{ detail: err }] });
                 }
-                res.status(201).send({ data: data });
+                return res.status(201).send({ data });
             });
-        }).catch(() => {
-            return res.status(409).send({ errors: [{ detail: 'Post already exists! '}]});
+        }).catch(() =>
+            res.status(409).send({ errors: [{ detail: 'Post already exists!' }] })
+        );
+    })
+    .delete((req, res) => {
+        Post.remove({}, err => {
+            if (err) {
+                return res.status(500).send({ errors: [{ detail: err }] });
+            }
+            return res.status(204).send();
         });
     });
 router.route('/posts/:id')
     .get((req, res) => {
         Post.findOne({ id: req.params.id }, (err, data) => {
             if (err) {
-                res.status(500).send({ errors: [{ detail: err }]});
+                return res.status(500).send({ errors: [{ detail: err }] });
+            } else if (!data) {
+                return res.status(404).send();
             }
-            res.send({ data: data });
-        })
+            return res.send({ data });
+        });
     })
     .patch((req, res) => {
-
+        Post.findOneAndUpdate({ id: req.params.id }, req.body.data, { new: true }, (err, data) => {
+            if (err) {
+                return res.status(500).send({ errors: [{ detail: err }] });
+            }
+            return res.send({ data });
+        });
     })
     .delete((req, res) => {
-
+        Post.findOneAndRemove({ id: req.params.id }, err => {
+            if (err) {
+                return res.status(500).send({ errors: [{ detail: err }] });
+            }
+            return res.status(204).send();
+        });
     });
 
 module.exports = router;

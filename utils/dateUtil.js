@@ -8,19 +8,16 @@ module.exports = {
         return this.formatDate(new Date());
     },
     getDoubleDigitString(n) {
-        const nInt = parseInt(n);
+        let nInt = parseInt(n, 10);
         if (nInt < 10) { // single digit or negative
             if (nInt < 0) { // negative
                 if (nInt < -9) { // negative (min) double digit
-                    return (n * -1).toString();
-                } else { // negative single digit
-                    return '0' + (nInt *= -1);
+                    return (nInt * -1).toString();
                 }
-            } else { // single digit
-                return '0' + n;
+                return `0${(nInt *= -1)}`;  // negative single digit
             }
-        } else { // (min) double digit
-            return n.toString();
+            return `0${n}`; // single digit
         }
-    }
-}
+        return nInt.toString();  // (min) double digit
+    },
+};

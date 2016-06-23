@@ -1,10 +1,10 @@
 module.exports = ENV => {
-    switch(ENV) {
+    switch (ENV) {
         case 'production':
             return {
                 port: 8010,
                 env: 'production',
-                dbUrl: process.env.DATABASE_URL
+                dbUrl: process.env.DATABASE_URL,
             };
         case 'test':
             return {
@@ -20,4 +20,4 @@ module.exports = ENV => {
                 dbUrl: 'mongodb://localhost:27017/alexkott-dev',
             };
     }
-}
+};

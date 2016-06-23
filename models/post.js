@@ -4,12 +4,12 @@ const postSchema = new mongoose.Schema({
     id: String,
     type: {
         type: String,
-        default: 'posts'
+        default: 'posts',
     },
     attributes: {
         dateCreated: String,
         title: String,
-        content: String
+        content: String,
     },
     relationships: {
         comments: {
@@ -17,23 +17,23 @@ const postSchema = new mongoose.Schema({
                 {
                     id: {
                         type: String,
-                        ref: 'Comment'
+                        ref: 'Comment',
                     },
                     type: {
                         type: String,
-                        default: 'comments'
-                    }
-                }
-            ]
-        }
-    }
+                        default: 'comments',
+                    },
+                },
+            ],
+        },
+    },
 }, {
     versionKey: false,
     toJSON: {
         transform(doc, ret) {
-            delete ret._id;
-        }
-    }
+            delete ret._id; // eslint-disable-line
+        },
+    },
 });
 
 module.exports = mongoose.model('Post', postSchema);
