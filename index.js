@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const config = require('./config')(process.env.NODE_ENV);
 const posts = require('./routes/api/posts');
+const pages = require('./routes/pages/index');
 
 const mongoose = require('mongoose');
 const db = mongoose.connection;
@@ -44,19 +45,7 @@ app.get('*', (req, res, next) => {
 
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-    res.render('index', {
-        title: 'test',
-        posts: [
-            {
-                title: 'post1',
-            },
-            {
-                title: 'post2',
-            },
-        ],
-    });
-});
+app.use('/', pages);
 
 app.get('/', (req, res) => {
     res.send('Working!');

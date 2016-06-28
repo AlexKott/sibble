@@ -1,4 +1,5 @@
 global.__base = `${__dirname}/../`;
+process.env.NODE_ENV = 'test';
 
 const DatabaseCleaner = require('database-cleaner');
 const databaseCleaner = new DatabaseCleaner('mongodb');
