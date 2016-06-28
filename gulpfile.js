@@ -11,7 +11,8 @@ gulp.task('default', ['css', 'lint', 'js']);
 
 gulp.task('w', () => {
     gulp.watch('./src/less/**/*.less', ['css']);
-    gulp.watch('./src/js/**/*.js', ['js', 'lint']);
+    gulp.watch('./src/js/**/*.js', ['js']);
+    gulp.watch(jsSrc, ['lint']);
 });
 
 gulp.task('js', () => {
@@ -43,7 +44,7 @@ gulp.task('lint', () => {
 const jsSrc = [
     './*.js',
     'models/*.js',
-    'routes/*.js',
+    'routes/**/*.js',
     'test/**/**/**/*.js',
     'utils/*.js',
     'src/js/*.js',

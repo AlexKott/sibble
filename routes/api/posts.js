@@ -6,13 +6,13 @@ const Post = require(`${__base}/models/post`);
 
 router.route('/posts')
     .get((req, res) => {
-        Post.find({}, (err, posts) => {
+        Post.find({}, (err, data) => {
             if (err) {
                 return res.status(500).send({ errors: [{ detail: err }] });
-            } else if (posts.length === 0) {
+            } else if (data.length === 0) {
                 return res.status(204).send();
             }
-            return res.send({ data: posts });
+            return res.send({ data });
         });
     })
     .post((req, res) => {

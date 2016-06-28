@@ -2,19 +2,20 @@ const assert = require('chai').assert;
 const app = require(`${__base}/index`);
 const request = require('supertest').agent(app.listen());
 
+const newPost = {
+    title: 'test get post',
+    dateCreated: '2014-01-20',
+};
+const newPost2 = Object.assign({}, newPost,
+    { title: 'test another get post' });
+
 describe('GET /api/posts', () => {
-    const newPost = {
-        title: 'test get post',
-        dateCreated: '2014-01-20',
-    };
     before((done) => {
         request.delete('/api/posts')
             .end(() => {
                 request.post('/api/posts')
                     .send({ data: { attributes: newPost } })
                     .end(() => {
-                        const newPost2 = newPost;
-                        newPost2.title = 'test another get post';
                         request.post('/api/posts')
                             .send({ data: { attributes: newPost2 } })
                             .end(() => {

@@ -3,22 +3,25 @@ const app = require(`${__base}/index`);
 const request = require('supertest').agent(app.listen());
 const slugUtil = require(`${__base}/utils/slugUtil`);
 
-const beforePost = {
+const newPost = {
     title: 'test post',
     dateCreated: '2000-01-02',
     content: 'Content for the test post',
 };
 const slug = slugUtil.generateSlug('test post', '2000-01-02');
 
+const newPost2 = Object.assign({}, newPost,
+    { title: 'test post 2' });
+const newPost3 = Object.assign({}, newPost,
+    { title: 'test post 3' });
+
 describe('DELETE /api/posts', () => {
     beforeEach((done) => {
         request.post('/api/posts')
-            .send({ data: { attributes: beforePost } })
+            .send({ data: { attributes: newPost } })
             .end(() => {
-                const post2 = beforePost;
-                post2.title = 'test post 2';
                 request.post('/api/posts')
-                    .send({ data: { attributes: post2 } }, done)
+                    .send({ data: { attributes: newPost2 } }, done)
                     .end(() => {
                         done();
                     });
@@ -40,13 +43,11 @@ describe('DELETE /api/posts', () => {
     });
     it('should not return any posts after a delete on all', (done) => {
         request.post('/api/posts')
-            .send({ data: { attributes: beforePost } })
+            .send({ data: { attributes: newPost } })
             .expect(201)
             .end(() => {
-                const post3 = beforePost;
-                post3.title = 'test post 3';
                 request.post('/api/posts')
-                    .send({ data: { attributes: post3 } })
+                    .send({ data: { attributes: newPost3 } })
                     .expect(201)
                     .end(() => {
                         request.delete('/api/posts')
