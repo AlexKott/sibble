@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const dateUtil = require('../../utils/dateUtil');
+const dateUtil = require(`${__base}/utils/dateUtil`);
 
 describe('dateUtil', () => {
     it('should transform single digits to double digit strings', () => {

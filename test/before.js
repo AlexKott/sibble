@@ -1,3 +1,5 @@
+global.__base = `${__dirname}/../`;
+
 const DatabaseCleaner = require('database-cleaner');
 const databaseCleaner = new DatabaseCleaner('mongodb');
 

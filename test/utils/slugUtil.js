@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const slugUtil = require('../../utils/slugUtil');
+const slugUtil = require(`${__base}/utils/slugUtil`);
 
 describe('slugUtil', () => {
     it('should slugify a given title', () => {

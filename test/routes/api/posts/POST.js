@@ -1,9 +1,9 @@
 process.env.NODE_ENV = 'test';
 
 const assert = require('chai').assert;
-const app = require('../../../index');
+const app = require(`${__base}/index`);
 const request = require('supertest').agent(app.listen());
-const dateUtil = require('../../../utils/dateUtil');
+const dateUtil = require(`${__base}/utils/dateUtil`);
 
 describe('POST /api/posts', () => {
     describe('date handling', () => {

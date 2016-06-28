@@ -1,7 +1,7 @@
 process.env.NODE_ENV = 'test';
 
 const assert = require('chai').assert;
-const app = require('../../../index');
+const app = require(`${__base}/index`);
 const request = require('supertest').agent(app.listen());
 
 describe('GET /api/posts', () => {

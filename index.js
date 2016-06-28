@@ -1,10 +1,12 @@
+global.__base = __dirname;
+
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
 const config = require('./config')(process.env.NODE_ENV);
-const posts = require('./routes/posts');
+const posts = require('./routes/api/posts');
 
 const mongoose = require('mongoose');
 const db = mongoose.connection;

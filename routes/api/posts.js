@@ -1,8 +1,8 @@
 const _ = require('lodash');
-const dateUtil = require('../utils/dateUtil');
-const slugUtil = require('../utils/slugUtil');
+const dateUtil = require(`${__base}/utils/dateUtil`);
+const slugUtil = require(`${__base}/utils/slugUtil`);
 const router = require('express').Router(); // eslint-disable-line
-const Post = require('../models/post');
+const Post = require(`${__base}/models/post`);
 
 router.route('/posts')
     .get((req, res) => {

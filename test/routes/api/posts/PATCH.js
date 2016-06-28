@@ -1,9 +1,9 @@
 process.env.NODE_ENV = 'test';
 
 const assert = require('chai').assert;
-const app = require('../../../index');
+const app = require(`${__base}/index`);
 const request = require('supertest').agent(app.listen());
-const slugUtil = require('../../../utils/slugUtil');
+const slugUtil = require(`${__base}/utils/slugUtil`);
 
 const beforePost = {
     title: 'test post',
