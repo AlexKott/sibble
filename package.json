@@ -7,8 +7,15 @@
   "repository": "https://github.com/AlexKott/alexkott-com",
   "scripts": {
     "start": "NODE_ENV='production' node index.js",
-    "test": "mocha --recursive -R list"
+    "test": "mocha --recursive -R list",
+    "lint": "gulp lint",
+    "nsp": "nsp check"
   },
+  "pre-commit": [
+      "test",
+      "lint",
+      "nsp"
+  ],
   "license": "ISC",
   "dependencies": {
     "body-parser": "1.15.x",
@@ -33,6 +40,7 @@
     "gulp-sourcemaps": "1.6.x",
     "less-plugin-autoprefix": "1.5.x",
     "mocha": "2.5.x",
+    "pre-commit": "*",
     "supertest": "1.2.x"
   }
 }
