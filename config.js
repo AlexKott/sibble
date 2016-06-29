@@ -8,7 +8,7 @@ module.exports = ENV => {
             };
         case 'test':
             return {
-                port: 8080,
+                port: 8020,
                 env: 'test',
                 dbUrl: 'mongodb://localhost:27017/alexkott-test',
             };
