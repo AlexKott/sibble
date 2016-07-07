@@ -1,22 +1,32 @@
+@import 'variables';
+
 html, body {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
+    font-weight: 300;
     line-height: 1.75;
+
+    color: @darkGrey;
 }
 
 h1, h2, h3, h4, h5 {
     font-family: Eczar, serif;
-    margin-top: 0;
+    margin: 0;
 }
+
 h1 {
     font-size: 36px;
-    line-height: 1.3333;
-    margin-bottom: @mediumGap;
+    line-height: 1 + 1/3;
 
     color: @darkBlue;
 }
+
 h2 {
     font-size: 24px;
-    line-height: 1.666666;
-    margin-bottom: @smallGap;
+    line-height: 1 + 1/3;
+}
+
+small, date {
+    font-size: 12px;
+    line-height: 1 + 1/3;
 }

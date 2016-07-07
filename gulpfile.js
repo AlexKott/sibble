@@ -7,6 +7,11 @@ const less = require('gulp-less');
 const LessAutoprefix = require('less-plugin-autoprefix');
 const autoprefix = new LessAutoprefix({ browsers: ['last 2 versions'] });
 
+function catchError(e) {
+    console.log(e);
+    this.emit('end')
+}
+
 gulp.task('default', ['css', 'lint', 'js']);
 
 gulp.task('w', () => {
@@ -31,6 +36,7 @@ gulp.task('css', () => {
         .pipe(less({
             plugins: [autoprefix]
         }))
+        .on('error', catchError)
         .pipe(gulp.dest('./public'));
 });
 

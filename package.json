@@ -12,9 +12,9 @@
     "nsp": "nsp check"
   },
   "pre-commit": [
-      "test",
-      "lint",
-      "nsp"
+    "test",
+    "lint",
+    "nsp"
   ],
   "license": "ISC",
   "dependencies": {

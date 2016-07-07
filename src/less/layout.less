@@ -1,10 +1,13 @@
 @import 'variables';
+
 html, body {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
+
 body {
     background-color: @grey;
 }
@@ -12,12 +15,25 @@ body {
 .wrapper {
     width: 100%;
     max-width: @wrapperMaxWidth;
-    min-height: ~'calc(100% - 2 * @{bigGap})';  
+    min-height: 100%;
     margin: 0 auto;
-    padding: @mediumGap @bigGap;
+    padding: @smallGap @baseUnit;
 
     background-color: @white;
     @media @small {
+        padding: @mediumGap @bigGap;
+    }
+    @media @medium {
+        min-height: ~'calc(100% - 2 * @{bigGap})';
         margin: @bigGap auto;
+        padding: @mediumGap @bigGap;
+    }
+}
+
+.page-title {
+    margin-left: @baseUnit;
+    margin-right: @baseUnit;
+    @media @small {
+        margin-bottom: @mediumGap;
     }
 }

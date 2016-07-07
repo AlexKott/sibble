@@ -7,7 +7,7 @@ router.route('/')
             if (err) {
                 return res.status(500).send({ errors: [{ detail: err }] });
             }
-            return res.render('admin', { posts: data, title: 'Admin Page' });
+            return res.render('admin', { posts: data, title: 'Posts' });
         });
     });
 
