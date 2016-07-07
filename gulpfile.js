@@ -10,8 +10,8 @@ const autoprefix = new LessAutoprefix({ browsers: ['last 2 versions'] });
 gulp.task('default', ['css', 'lint', 'js']);
 
 gulp.task('w', () => {
-    gulp.watch('./src/less/**/*.less', ['css']);
-    gulp.watch('./src/js/**/*.js', ['js']);
+    gulp.watch('src/less/**/*.less', ['css']);
+    gulp.watch('src/js/**/*.js', ['js']);
     gulp.watch(jsSrc, ['lint']);
 });
 
