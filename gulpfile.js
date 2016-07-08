@@ -1,8 +1,9 @@
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
-const babel = require('gulp-babel');
+const browserify = require('browserify');
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
 const sourcemaps = require('gulp-sourcemaps');
-const concat = require('gulp-concat');
 const less = require('gulp-less');
 const LessAutoprefix = require('less-plugin-autoprefix');
 const autoprefix = new LessAutoprefix({ browsers: ['last 2 versions'] });
@@ -17,22 +18,33 @@ gulp.task('default', ['css', 'lint', 'js']);
 gulp.task('w', () => {
     gulp.watch('src/less/**/*.less', ['css']);
     gulp.watch('src/js/**/*.js', ['js']);
+    gulp.watch('test/phamtomjs/**/*.js', ['compileTests']);
     gulp.watch(jsSrc, ['lint']);
 });
 
 gulp.task('js', () => {
-    return gulp.src('./src/js/app.js')
-        .pipe(sourcemaps.init())
-        .pipe(babel({
-            presets: ['es2015']
-        }))
-        .pipe(concat('script.js'))
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('./public'));
+    return browserify('src/js/app.js', { debug: true })
+        .transform("babelify", { presets: ["es2015"] })
+        .bundle()
+        .on('error', catchError)
+        .pipe(source('script.js'))
+        .pipe(buffer())
+        .pipe(sourcemaps.init({ loadMaps: true }))
+        .pipe(sourcemaps.write('public'))
+        .pipe(gulp.dest('public'));
+});
+
+gulp.task('compileTests', () => {
+    return browserify('test_phantomjs/entry.js', { debug: true })
+        .transform("babelify", { presets: ["es2015"] })
+        .bundle()
+        .on('error', catchError)
+        .pipe(source('test.js'))
+        .pipe(gulp.dest('test_phantomjs'));
 });
 
 gulp.task('css', () => {
-    return gulp.src('./src/less/main.less')
+    return gulp.src('src/less/main.less')
         .pipe(less({
             plugins: [autoprefix]
         }))
@@ -52,6 +64,7 @@ const jsSrc = [
     'models/*.js',
     'routes/**/*.js',
     'test/**/**/**/*.js',
+    '!test/phantomjs/test.js',
     'utils/*.js',
     'src/js/*.js',
     '!node_modules/**',
