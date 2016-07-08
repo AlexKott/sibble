@@ -1,0 +1,11 @@
+<section class="post-list">
+    {{#each posts as |post|}}
+        <article class="post-list__teaser">
+            <div class="post-list__meta">
+                <h2 class="post-list__title">{{post.attributes.title}}</h2>
+                <date class="post-list__date">{{post.attributes.dateCreated}}</date>
+            </div>
+            <small class="post-list__content">{{post.attributes.content}}</small>
+        </article>
+    {{/each}}
+</section>

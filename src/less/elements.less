@@ -3,20 +3,56 @@
 .button {
     display: block;
     height: @bigGap;
-    min-width: @elementMinWidth;
+    width: @elementMinWidth;
     margin: @smallGap auto;
 
     box-shadow: none;
     border-radius: 0;
     border: 0;
+    line-height: @bigGap;
+    text-align: center;
     text-transform: uppercase;
-    color: @white;
     font-family: inherit;
     font-weight: 300;
     font-size: 20px;
     -webkit-appearance: none;
+    color: @white;
 
     &--submit {
         background-color: @mediumBlue;
     }
+}
+
+.input, .textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: @mediumGap;
+
+    box-shadow: none;
+    border-radius: 0;
+    border: 0;
+    font-family: inherit;
+    font-weight: 300;
+    font-size: 16px;
+    -webkit-appearance: none;
+    color: @darkGrey;
+    background-color: @grey;
+
+    @media @medium {
+        width: @elementMinWidth;
+        &--full-width {
+            width: 100%;
+        }
+    }
+}
+
+.input {
+    height: @bigGap;
+    padding: 0 @smallGap;
+}
+
+.textarea {
+    min-height: 320px;
+    padding: @smallGap;
+    resize: none;
 }

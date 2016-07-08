@@ -1,12 +1,2 @@
-<button type="button" class="button button--submit">New Post</button>
-<section class="post-list">
-    {{#each posts as |post|}}
-        <article class="post-list__teaser">
-            <div class="post-list__meta">
-                <h2 class="post-list__title">{{post.attributes.title}}</h2>
-                <date class="post-list__date">{{post.attributes.dateCreated}}</date>
-            </div>
-            <small class="post-list__content">{{post.attributes.content}}</small>
-        </article>
-    {{/each}}
-</section>
+<a href="/admin/new" class="button button--submit">New Post</a>
+{{>post-list posts=posts}}

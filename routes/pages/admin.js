@@ -10,7 +10,8 @@ router.route('/')
             return res.render('admin', { posts: data, title: 'Posts' });
         });
     });
-
+router.route('/new')
+    .get((req, res) => res.render('new-post', { title: 'New Post' }));
 router.route('/login')
     .get((req, res) => res.render('login', { title: 'Login' }));
 
