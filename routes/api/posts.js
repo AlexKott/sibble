@@ -1,6 +1,8 @@
 const _ = require('lodash');
 const dateUtil = require(`${__base}/utils/dateUtil`);
 const slugUtil = require(`${__base}/utils/slugUtil`);
+const jsonApi = require(`${__base}/utils/jsonApi`);
+const validatePost = require(`${__base}/utils/validatePost`);
 const router = require('express').Router(); // eslint-disable-line
 const Post = require(`${__base}/models/post`);
 
@@ -16,36 +18,26 @@ router.route('/posts')
         });
     })
     .post((req, res) => {
-        const newPost = new Post(req.body.data);
+        jsonApi.validate(req.body).then((post) => {
+            const newPost = new Post(post.data);
 
-        if (!_.get(newPost, 'attributes.dateCreated')) {
-            newPost.attributes.dateCreated = dateUtil.getToday();
-        }
-        newPost.id = slugUtil.generateSlug(
-             newPost.attributes.title,
-             newPost.attributes.dateCreated
-         );
+            if (!_.get(newPost, 'attributes.dateCreated')) {
+                newPost.attributes.dateCreated = dateUtil.getToday();
+            }
+            newPost.id = slugUtil.generateSlug(
+                 newPost.attributes.title,
+                 newPost.attributes.dateCreated
+             );
 
-        const validatePost = new Promise((resolve, reject) => {
-            Post.findOne({ id: newPost.id }, (err, data) => {
-                if (data) {
-                    reject();
-                } else {
-                    resolve();
-                }
-            });
-        });
-
-        validatePost.then(() => {
-            newPost.save((err, data) => {
-                if (err) {
-                    return res.status(500).send({ errors: [{ detail: err }] });
-                }
-                return res.status(201).send({ data });
-            });
-        }).catch(() =>
-            res.status(409).send({ errors: [{ detail: 'Post already exists!' }] })
-        );
+            validatePost(newPost).then(() => {
+                newPost.save((err, data) => {
+                    if (err) {
+                        return res.status(500).send({ errors: [{ detail: err }] });
+                    }
+                    return res.status(201).send({ data });
+                });
+            }).catch(() => res.status(409).send({ errors: [{ detail: 'Post already exists!' }] }));
+        }).catch(() => res.status(422).send({ errors: [{ detail: 'Bad data format!' }] }));
     })
     .delete((req, res) => {
         Post.remove({}, err => {

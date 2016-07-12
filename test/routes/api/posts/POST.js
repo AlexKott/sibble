@@ -39,6 +39,7 @@ describe('POST /api/posts', () => {
                 .send({ data: { attributes: newPost2 } })
                 .expect(201)
                 .end((err, data) => {
+                    assert.equal(data.status, 201);
                     assert.equal(
                         data.body.data.attributes.dateCreated,
                         '2016-01-10',
@@ -75,6 +76,16 @@ describe('POST /api/posts', () => {
                     assert.isNotNull(data, 'Api responses with data');
                     assert.equal(data.status, 409, 'Api sends correct error code');
                     assert.property(data.body.errors[0], 'detail', 'Api sends error details');
+                    done();
+                });
+        });
+        it('accept invalid data formats', (done) => {
+            const invalidData = { title: 'testing title', content: 'new content' };
+            request.post('/api/posts')
+                .send(invalidData)
+                .expect(201)
+                .end((err, data) => {
+                    assert.equal(data.body.data.attributes.title, invalidData.title);
                     done();
                 });
         });
