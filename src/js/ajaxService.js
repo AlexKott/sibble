@@ -1,12 +1,11 @@
-const API = '/api/posts/';
-
-function request(method, data, post) {
+export default function request(target, method, data) {
+    const url = `/api/${target}`;
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
-        const uri = post ? API + post : API;
 
-        xhr.open(method, uri);
-        xhr.send();
+        xhr.open(method, url);
+        xhr.setRequestHeader('Content-Type', 'application/vnd.api+json');
+        xhr.send(JSON.stringify(data));
 
         xhr.onload = function onload() {
             if (this.status >= 200 && this.status < 300) {
@@ -20,12 +19,3 @@ function request(method, data, post) {
         };
     });
 }
-
-export default {
-    save(data) {
-        return request('POST', data);
-    },
-    update(data, post) {
-        return request('PUT', data, post);
-    },
-};

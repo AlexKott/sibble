@@ -1,4 +1,5 @@
 <form id="new-post" class="new-post" action="../api/posts" method="post">
+    <input type="hidden" name="api_target" value="posts" />
     <input type="text" name="title" class="input input--full-width" placeholder="<Untitled Post>" />
     <textarea name="content" class="textarea textarea--full-width"></textarea>
     <div class="new-post__form-group">
