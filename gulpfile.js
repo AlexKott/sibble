@@ -67,6 +67,7 @@ const jsSrc = [
     '!test/phantomjs/test.js',
     'utils/*.js',
     'src/js/*.js',
+    'src/hbs/helpers/**/*.js',
     '!node_modules/**',
     '!gulpfile.js',
     '!public/*.js'

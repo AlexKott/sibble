@@ -5,6 +5,7 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
+const hbsHelpers = require('./src/hbs/helpers');
 const config = require('./config')(process.env.NODE_ENV);
 const posts = require('./routes/api/posts');
 const indexPage = require('./routes/pages/index');
@@ -16,6 +17,7 @@ const hbs = exphbs.create({
     layoutsDir: './src/hbs',
     partialsDir: './src/hbs/partials',
     defaultLayout: 'index',
+    helpers: hbsHelpers,
 });
 const mongoose = require('mongoose');
 const db = mongoose.connection;
