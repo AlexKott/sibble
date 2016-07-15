@@ -1,7 +1,7 @@
 const assert = require('chai').assert;
 const tagBuilder = require(`${__base}/utils/tagBuilder`);
 
-describe.only('tag builder', () => {
+describe('tag builder', () => {
     it('should create the correct html tag', () => {
         const options = {
             tagName: 'div',
