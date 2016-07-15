@@ -1,3 +1,4 @@
 const date = require('./dateHelper');
+const link = require('./linkHelper');
 
-module.exports = { date };
+module.exports = { date, link };

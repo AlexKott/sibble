@@ -21,6 +21,7 @@
     "body-parser": "1.15.x",
     "express": "4.14.x",
     "express-handlebars": "3.0.x",
+    "html-element": "1.5.x",
     "lodash": "4.13.x",
     "mongoose": "4.5.x",
     "morgan": "1.7.x",
