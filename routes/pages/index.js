@@ -1,14 +1,15 @@
 const router = require('express').Router(); // eslint-disable-line
-const Post = require(`${__base}/models/post`);
+const postService = require(`${__base}/services/postService`);
 
 router.route('/')
     .get((req, res) => {
-        Post.find({}, (err, data) => {
-            if (err) {
-                return res.status(500).send({ errors: [{ detail: err }] });
-            }
-            return res.render('posts', { posts: data });
-        });
+        postService
+            .findAllAndSort('dateCreated')
+            .then(result => res.render(
+                'posts',
+                { posts: result.data, title: 'Start' }
+            ))
+            .catch(result => res.render('error', { error: result.error }));
     });
 
 module.exports = router;

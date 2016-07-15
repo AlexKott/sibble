@@ -5,6 +5,8 @@ module.exports = {
                 return obj;
             }
             return { data: { attributes: obj.data } };
+        } else if (obj.hasOwnProperty('attributes')) {
+            return { data: obj };
         }
         return { data: { attributes: obj } };
     },

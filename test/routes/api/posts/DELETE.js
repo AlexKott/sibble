@@ -36,7 +36,6 @@ describe('DELETE /api/posts', () => {
                     .expect(404)
                     .end((err2, data2) => {
                         assert.equal(data2.status, 404, 'Api does not find removed post');
-                        assert.lengthOf(Object.keys(data2.body), 0, 'Api returns empty body');
                         done();
                     });
             });

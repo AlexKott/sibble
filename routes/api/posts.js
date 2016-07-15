@@ -1,78 +1,59 @@
-const _ = require('lodash');
-const dateUtil = require(`${__base}/utils/dateUtil`);
-const slugUtil = require(`${__base}/utils/slugUtil`);
-const jsonApi = require(`${__base}/utils/jsonApi`);
-const validatePost = require(`${__base}/utils/validatePost`);
 const router = require('express').Router(); // eslint-disable-line
-const Post = require(`${__base}/models/post`);
+const postService = require(`${__base}/services/postService`);
 
 router.route('/posts')
     .get((req, res) => {
-        Post.find({}, (err, data) => {
-            if (err) {
-                return res.status(500).send({ errors: [{ detail: err }] });
-            } else if (data.length === 0) {
-                return res.status(204).send();
-            }
-            return res.send({ data });
-        });
+        postService
+            .findAllAndSort('dateCreated')
+            .then(result => {
+                if (!result.data) {
+                    return res.status(204).send();
+                }
+                return res.status(200).send({ data: result.data });
+            })
+            .catch(result => res.status(500).send({ errors: [{ detail: result.error }] }));
     })
     .post((req, res) => {
-        jsonApi.validate(req.body).then((post) => {
-            const newPost = new Post(post.data);
-
-            if (!_.get(newPost, 'attributes.dateCreated')) {
-                newPost.attributes.dateCreated = dateUtil.getToday();
-            }
-            newPost.id = slugUtil.generateSlug(
-                 newPost.attributes.title,
-                 newPost.attributes.dateCreated
-             );
-
-            validatePost(newPost).then(() => {
-                newPost.save((err, data) => {
-                    if (err) {
-                        return res.status(500).send({ errors: [{ detail: err }] });
-                    }
-                    return res.status(201).send({ data });
-                });
-            }).catch(() => res.status(409).send({ errors: [{ detail: 'Post already exists!' }] }));
-        }).catch(() => res.status(422).send({ errors: [{ detail: 'Bad data format!' }] }));
+        postService
+            .save(req.body)
+            .then(result => res.status(201).send({ data: result.data }))
+            .catch(result => res.status(result.status)
+                .send({ errors: [{ detail: result.error }] })
+            );
     })
     .delete((req, res) => {
-        Post.remove({}, err => {
-            if (err) {
-                return res.status(500).send({ errors: [{ detail: err }] });
-            }
-            return res.status(204).send();
-        });
+        postService
+            .deleteAll()
+            .then(() => res.status(204).send())
+            .catch(result => res.status(500)
+                .send({ errors: [{ detail: result.error }] })
+            );
     });
+
 router.route('/posts/:id')
     .get((req, res) => {
-        Post.findOne({ id: req.params.id }, (err, data) => {
-            if (err) {
-                return res.status(500).send({ errors: [{ detail: err }] });
-            } else if (!data) {
-                return res.status(404).send();
-            }
-            return res.send({ data });
-        });
+        postService
+            .findOne(req.params.id)
+            .then(result => res.status(200).send({ data: result.data }))
+            .catch(result => res.status(result.status)
+                .send({ errors: [{ detail: result.error }] })
+            );
     })
     .patch((req, res) => {
-        Post.findOneAndUpdate({ id: req.params.id }, req.body.data, { new: true }, (err, data) => {
-            if (err) {
-                return res.status(500).send({ errors: [{ detail: err }] });
-            }
-            return res.send({ data });
-        });
+        postService
+            .update(req.params.id, req.body.data)
+            .then(result => res.status(200).send({ data: result.data }))
+            .catch(result => res.status(500)
+                .send({ errors: [{ detail: result.error }] })
+            );
     })
     .delete((req, res) => {
-        Post.findOneAndRemove({ id: req.params.id }, err => {
-            if (err) {
-                return res.status(500).send({ errors: [{ detail: err }] });
-            }
-            return res.status(204).send();
-        });
+        postService
+            .deleteOne(req.params.id)
+            .then(() => res.status(204).send())
+            .catch(result => res.status(500)
+                .send({ errors: [{ detail: result.error }] })
+            );
     });
 
 module.exports = router;

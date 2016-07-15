@@ -63,6 +63,7 @@ const jsSrc = [
     './*.js',
     'models/*.js',
     'routes/**/*.js',
+    'services/**/*.js',
     'test/**/**/**/*.js',
     '!test/phantomjs/test.js',
     'utils/*.js',
