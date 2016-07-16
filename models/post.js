@@ -40,7 +40,7 @@ const postSchema = new mongoose.Schema({
     },
 });
 
-postSchema.virtual('links.self').get(function () {
+postSchema.virtual('links.self').get(function virtualPostLink() {
     return `/posts/${this.id}`;
 });
 

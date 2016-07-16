@@ -21,13 +21,11 @@ gulp.task('w', () => {
     livereload.listen();
     nodemon({
         script: 'index.js'
-    }).on('restart', () => {
-        gulp.src('index.js')
-            .pipe(livereload());
     });
     gulp.watch('src/less/**/*.less', ['css']);
     gulp.watch('src/js/**/*.js', ['js']);
     gulp.watch('test/phamtomjs/**/*.js', ['compileTests']);
+    gulp.watch('src/hbs/**/**/*', ['hbs']);
     gulp.watch(jsSrc, ['lint']);
 });
 
@@ -40,16 +38,13 @@ gulp.task('js', () => {
         .pipe(buffer())
         .pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(sourcemaps.write('public'))
-        .pipe(gulp.dest('public'));
+        .pipe(gulp.dest('public'))
+        .pipe(livereload());
 });
 
-gulp.task('compileTests', () => {
-    return browserify('test_phantomjs/entry.js', { debug: true })
-        .transform("babelify", { presets: ["es2015"] })
-        .bundle()
-        .on('error', catchError)
-        .pipe(source('test.js'))
-        .pipe(gulp.dest('test_phantomjs'));
+gulp.task('hbs', () => {
+    return gulp.src('src/hbs/index.hbs')
+        .pipe(livereload());
 });
 
 gulp.task('css', () => {
@@ -66,7 +61,17 @@ gulp.task('lint', () => {
     return gulp.src(jsSrc)
         .pipe(eslint())
         .pipe(eslint.format())
-        .pipe(eslint.failAfterError());
+        .pipe(eslint.failAfterError())
+        .pipe(livereload());
+});
+
+gulp.task('compileTests', () => {
+    return browserify('test_phantomjs/entry.js', { debug: true })
+        .transform("babelify", { presets: ["es2015"] })
+        .bundle()
+        .on('error', catchError)
+        .pipe(source('test.js'))
+        .pipe(gulp.dest('test_phantomjs'));
 });
 
 const jsSrc = [

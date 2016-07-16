@@ -66,7 +66,7 @@ describe('GET /api/posts', () => {
                 done();
             });
     });
-    it.only('should return a link to self', (done) => {
+    it('should return a link to self', (done) => {
         request.get('/api/posts/test-get-post_2014-01-20')
             .expect(200)
             .end((err, data) => {

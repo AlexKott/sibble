@@ -1,0 +1,30 @@
+.date {
+    position: relative;
+    margin: -@baseUnit 0 @smallGap;
+    line-height: 1;
+    @media @small {
+        width: 50%;
+        margin: -@baseUnit 0 @mediumGap;
+    }
+    &__content {
+        position: relative;
+        margin: 0 0 0 @smallGap;
+        padding: 0 @baseUnit;
+        background-color: @white;
+    }
+    &:before {
+        content: '';
+        position: absolute;
+        display: block;
+        height: 1px;
+        width: calc(100% + 2 * @baseUnit);
+        top: 50%;
+        left: 0;
+        margin: 0 -@baseUnit;
+        background-color: @grey;
+        @media @small {
+            width: 100%;
+            margin: 0;
+        }
+    }
+}
