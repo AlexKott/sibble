@@ -1,4 +1,6 @@
 const gulp = require('gulp');
+const nodemon = require('gulp-nodemon');
+const livereload = require('gulp-livereload');
 const eslint = require('gulp-eslint');
 const browserify = require('browserify');
 const source = require('vinyl-source-stream');
@@ -16,6 +18,13 @@ function catchError(e) {
 gulp.task('default', ['css', 'lint', 'js']);
 
 gulp.task('w', () => {
+    livereload.listen();
+    nodemon({
+        script: 'index.js'
+    }).on('restart', () => {
+        gulp.src('index.js')
+            .pipe(livereload());
+    });
     gulp.watch('src/less/**/*.less', ['css']);
     gulp.watch('src/js/**/*.js', ['js']);
     gulp.watch('test/phamtomjs/**/*.js', ['compileTests']);
@@ -49,7 +58,8 @@ gulp.task('css', () => {
             plugins: [autoprefix]
         }))
         .on('error', catchError)
-        .pipe(gulp.dest('./public'));
+        .pipe(gulp.dest('./public'))
+        .pipe(livereload());
 });
 
 gulp.task('lint', () => {

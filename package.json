@@ -39,6 +39,8 @@
     "gulp": "3.9.x",
     "gulp-eslint": "2.0.x",
     "gulp-less": "3.1.x",
+    "gulp-livereload": "3.8.x",
+    "gulp-nodemon": "2.1.x",
     "gulp-sourcemaps": "1.6.x",
     "less-plugin-autoprefix": "1.5.x",
     "mocha": "2.5.x",
