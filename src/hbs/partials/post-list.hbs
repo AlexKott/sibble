@@ -1,6 +1,6 @@
 <section class="post-list">
     {{#each posts as |post|}}
-        {{#link href=post.id className="post-list__teaser"}}
+        {{#link href=post.links.self className="post-list__teaser"}}
             <div class="post-list__meta">
                 <h2 class="post-list__title">{{post.attributes.title}}</h2>
                 <date class="post-list__date">{{date post.attributes.dateCreated}}</date>

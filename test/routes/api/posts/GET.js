@@ -66,4 +66,18 @@ describe('GET /api/posts', () => {
                 done();
             });
     });
+    it.only('should return a link to self', (done) => {
+        request.get('/api/posts/test-get-post_2014-01-20')
+            .expect(200)
+            .end((err, data) => {
+                assert.property(data.body.data, 'links', 'Return data has link object');
+                assert.property(data.body.data.links, 'self', 'Return data has link to self');
+                assert.equal(
+                    data.body.data.links.self,
+                    '/posts/test-get-post_2014-01-20',
+                    'Return data contains a link to the resource'
+                );
+                done();
+            });
+    });
 });

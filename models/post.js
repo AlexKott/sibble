@@ -33,7 +33,15 @@ const postSchema = new mongoose.Schema({
         transform(doc, ret) {
             delete ret._id; // eslint-disable-line
         },
+        virtuals: true,
     },
+    toObject: {
+        virtuals: true,
+    },
+});
+
+postSchema.virtual('links.self').get(function () {
+    return `/posts/${this.id}`;
 });
 
 module.exports = mongoose.model('Post', postSchema);
