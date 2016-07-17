@@ -1,4 +1,3 @@
-const assert = require('chai').assert;
 const tagBuilder = require(`${__base}/utils/tagBuilder`);
 
 describe('tag builder', () => {

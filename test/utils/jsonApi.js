@@ -1,6 +1,4 @@
-const assert = require('chai').assert;
 const jsonApi = require(`${__base}/utils/jsonApi`);
-
 
 describe('JSON API util', () => {
     it('should build a valid data and attribute wrapper', () => {

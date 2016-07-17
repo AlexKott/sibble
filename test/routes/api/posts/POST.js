@@ -1,6 +1,3 @@
-const assert = require('chai').assert;
-const app = require(`${__base}/index`);
-const request = require('supertest').agent(app.listen());
 const dateUtil = require(`${__base}/utils/dateUtil`);
 
 const today = dateUtil.getToday();

@@ -1,4 +1,3 @@
-const assert = require('chai').assert;
 const slugUtil = require(`${__base}/utils/slugUtil`);
 
 describe('slugUtil', () => {

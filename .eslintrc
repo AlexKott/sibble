@@ -11,6 +11,7 @@
         "assert": true,
         "describe": true,
         "it": true,
-        "__base": true
+        "__base": true,
+        "request": true
     }
 }

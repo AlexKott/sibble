@@ -1,7 +1,3 @@
-const assert = require('chai').assert;
-const app = require(`${__base}/index`);
-const request = require('supertest').agent(app.listen());
-
 describe('GET index', () => {
     const newPost = {
         title: 'test get post',

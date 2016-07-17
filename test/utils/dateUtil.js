@@ -1,4 +1,3 @@
-const assert = require('chai').assert;
 const dateUtil = require(`${__base}/utils/dateUtil`);
 
 describe('dateUtil', () => {

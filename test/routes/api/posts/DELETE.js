@@ -1,6 +1,3 @@
-const assert = require('chai').assert;
-const app = require(`${__base}/index`);
-const request = require('supertest').agent(app.listen());
 const slugUtil = require(`${__base}/utils/slugUtil`);
 
 const newPost = {
