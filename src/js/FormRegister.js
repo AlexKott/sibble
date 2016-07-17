@@ -1,6 +1,9 @@
 import ajaxService from './ajaxService';
 
 export default class FormRegister {
+    constructor() {
+        this.forms = [];
+    }
     update() {
         this.forms = Array.from(document.querySelectorAll('form'));
         this.addListeners();

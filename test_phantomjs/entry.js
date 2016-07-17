@@ -1,2 +1,6 @@
 require('babelify-es6-polyfill');
-require('./ajaxService');
+require('./FormRegister');
+
+afterEach(() => {
+    document.querySelector('#mocha').innerHTML = '';
+});

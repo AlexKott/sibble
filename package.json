@@ -51,6 +51,7 @@
     "less-plugin-autoprefix": "1.5.x",
     "mocha": "2.5.x",
     "pre-commit": "*",
+    "sinon": "1.17.x",
     "supertest": "1.2.x",
     "vinyl-buffer": "1.0.x",
     "vinyl-source-stream": "1.1.x"
