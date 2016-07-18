@@ -28,9 +28,9 @@
     "remove-accents": "0.3.x"
   },
   "devDependencies": {
+    "babel-polyfill": "^6.9.1",
     "babel-preset-es2015": "6.9.x",
     "babelify": "7.3.x",
-    "babelify-es6-polyfill": "1.0.x",
     "browserify": "13.0.x",
     "chai": "3.5.x",
     "eslint-config-airbnb-base": "3.0.x",

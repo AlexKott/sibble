@@ -27,7 +27,10 @@ gulp.task('default', ['js', 'hbs', 'css']);
 gulp.task('w', () => {
     livereload.listen();
     nodemon({
-        script: 'index.js'
+        script: 'index.js',
+        execMap: {
+          js: 'node-inspector --p= & node --debug'
+        },
     });
     gulp.watch('src/less/**/*.less', ['css']);
     gulp.watch('src/js/**/*.js', ['js']);

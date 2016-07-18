@@ -1,4 +1,4 @@
-require('babelify-es6-polyfill');
+require('babel-polyfill');
 require('./FormRegister');
 
 afterEach(() => {
