@@ -83,7 +83,7 @@ gulp.task('lint', () => {
         .pipe(livereload());
 });
 
-gulp.task('test', ['test-phantom'], () => {
+gulp.task('test-unit', () => {
     return gulp.src('test/**/**/**/*.js')
         .pipe(mocha({ reporter: 'list' }))
         .once('error', (e) => {
@@ -95,7 +95,7 @@ gulp.task('test', ['test-phantom'], () => {
         });;
 });
 
-gulp.task('test-phantom', ['compileTests'], () => {
+gulp.task('test-integration', ['compileTests'], () => {
     return gulp.src('test_phantomjs/test.html')
         .pipe(mochaPhantom({ reporter: 'list' }));
 });

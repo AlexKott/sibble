@@ -7,7 +7,7 @@
   "repository": "https://github.com/AlexKott/alexkott-com",
   "scripts": {
     "start": "NODE_ENV='production' node index.js",
-    "test": "gulp test",
+    "test": "gulp test-unit && gulp test-integration",
     "lint": "gulp lint",
     "nsp": "nsp check"
   },

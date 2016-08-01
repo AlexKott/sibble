@@ -1,6 +1,6 @@
 const slugUtil = require(`${__base}/utils/slugUtil`);
 
-describe.only('slugUtil', () => {
+describe('slugUtil', () => {
     it('should slugify a given title', () => {
         const title1 = 'test title';
         const slugTitle1 = 'test-title';
