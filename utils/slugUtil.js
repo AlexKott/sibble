@@ -6,6 +6,9 @@ module.exports = {
         return slug.toLowerCase();
     },
     slugifyTitle(title) {
-        return removeAccents(title.replace(/\s/g, '-'));
+        let slugTitle = title.replace(/\s/g, '-');
+        slugTitle = removeAccents(slugTitle);
+        slugTitle = slugTitle.replace(/[^a-zA-Z0-9\-]/g, '');
+        return slugTitle.replace(/\-{2,}/g, '-');
     },
 };

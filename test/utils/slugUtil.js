@@ -1,6 +1,6 @@
 const slugUtil = require(`${__base}/utils/slugUtil`);
 
-describe('slugUtil', () => {
+describe.only('slugUtil', () => {
     it('should slugify a given title', () => {
         const title1 = 'test title';
         const slugTitle1 = 'test-title';
@@ -22,6 +22,12 @@ describe('slugUtil', () => {
         const date = '2000-03-10';
         const slug = 'test-title-three_2000-03-10';
 
+        assert.equal(slugUtil.generateSlug(title, date), slug);
+    });
+    it('should remove special characters from the slug', () => {
+        const title = 'this is a ,. special(?) title!';
+        const date = '2000-02-02';
+        const slug = 'this-is-a-special-title_2000-02-02';
         assert.equal(slugUtil.generateSlug(title, date), slug);
     });
 });

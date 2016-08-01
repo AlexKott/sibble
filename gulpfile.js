@@ -85,18 +85,19 @@ gulp.task('lint', () => {
 
 gulp.task('test', ['test-phantom'], () => {
     return gulp.src('test/**/**/**/*.js')
-        .pipe(mocha({ reporter: 'dot' }))
-        .once('error', () => {
+        .pipe(mocha({ reporter: 'list' }))
+        .once('error', (e) => {
+            console.error(e);
             process.exit(1);
         })
-        .once('end', () => {
+        .once('end', (e) => {
             process.exit();
         });;
 });
 
 gulp.task('test-phantom', ['compileTests'], () => {
     return gulp.src('test_phantomjs/test.html')
-        .pipe(mochaPhantom({ reporter: 'dot' }));
+        .pipe(mochaPhantom({ reporter: 'list' }));
 });
 
 gulp.task('compileTests', () => {
