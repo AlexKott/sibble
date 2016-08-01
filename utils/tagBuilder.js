@@ -1,4 +1,5 @@
 require('html-element');
+require('babel-polyfill');
 
 module.exports = function tagBuilder(options) {
     const element = document.createElement(options.tagName);
@@ -7,6 +8,11 @@ module.exports = function tagBuilder(options) {
 
     if (options.tagName === 'a') {
         element.href = options.href;
+    }
+    if (options.hasOwnProperty('data')) {
+        for (const [key, value] of Object.entries(options.data)) {
+            element.setAttribute(`data-${key}`, value);
+        }
     }
 
     return element.outerHTML;

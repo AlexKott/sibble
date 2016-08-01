@@ -6,6 +6,9 @@ module.exports = function linkHelper(opts) {
         innerHTML: opts.fn(),
         href: opts.hash.href,
         className: opts.hash.className,
+        data: {
+            target: opts.hash.target,
+        },
     };
     return tagBuilder(options);
 };

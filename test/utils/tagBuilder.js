@@ -33,4 +33,15 @@ describe('tag builder', () => {
         const markup = tagBuilder(options);
         assert.equal(markup, '<a href="url">link</a>');
     });
+    it('should add all provided data attributes to the element', () => {
+        const options = {
+            tagName: 'div',
+            data: {
+                target: 'internal',
+                test: 'testing',
+            },
+        };
+        const markup = tagBuilder(options);
+        assert.equal(markup, '<div data-target="internal" data-test="testing"></div>');
+    });
 });

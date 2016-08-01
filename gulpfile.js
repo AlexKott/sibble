@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const gulpIf = require('gulp-if');
 const nodemon = require('gulp-nodemon');
 const livereload = require('gulp-livereload');
 const eslint = require('gulp-eslint');
@@ -79,7 +80,7 @@ gulp.task('lint', () => {
     return gulp.src(jsSrc)
         .pipe(eslint())
         .pipe(eslint.format())
-        .pipe(eslint.failAfterError())
+        .pipe(gulpIf(process.env.NODE_ENV === 'production', eslint.failAfterError()))
         .pipe(livereload());
 });
 
