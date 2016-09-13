@@ -10,14 +10,14 @@ module.exports = ENV => {
             return {
                 port: 8020,
                 env: 'test',
-                dbUrl: 'mongodb://localhost:27017/alexkott-test',
+                dbUrl: 'mongodb://localhost:27017/sibble-test',
             };
         case 'development':
         default:
             return {
                 port: 8080,
                 env: 'development',
-                dbUrl: 'mongodb://localhost:27017/alexkott-dev',
+                dbUrl: 'mongodb://localhost:27017/sibble-dev',
             };
     }
 };

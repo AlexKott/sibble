@@ -1,10 +1,10 @@
 {
-  "name": "alexkott_com",
+  "name": "sibble",
   "version": "1.0.0",
-  "description": "Personal blog",
+  "description": "Simple Blog Engine",
   "main": "index.js",
   "author": "Alex Kott",
-  "repository": "https://github.com/AlexKott/alexkott-com",
+  "repository": "https://github.com/AlexKott/sibble",
   "scripts": {
     "start": "NODE_ENV='production' node index.js",
     "test": "gulp test-unit && gulp test-integration",

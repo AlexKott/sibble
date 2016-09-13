@@ -8,7 +8,7 @@ global.request = require('supertest').agent(server);
 global.assert = require('chai').assert;
 
 before((done) => {
-    mongodb.connect('mongodb://localhost/alexkott-test', (err, db) => {
+    mongodb.connect('mongodb://localhost/sibble-test', (err, db) => {
         db.dropDatabase();
         done();
     });
