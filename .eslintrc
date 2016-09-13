@@ -2,7 +2,9 @@
     "extends": "airbnb-base",
     "rules": {
         "indent": ["error", 4, { "SwitchCase": 1 }],
-        "no-underscore-dangle": "off"
+        "no-underscore-dangle": "off",
+        "import/no-extraneous-dependencies": "off",
+        "import/newline-after-import": "off"
     },
     "globals": {
         "before": true,
@@ -12,6 +14,10 @@
         "describe": true,
         "it": true,
         "__base": true,
-        "request": true
+        "request": true,
+        "XMLHttpRequest": true,
+        "document": true,
+        "window": true,
+        "FormData": true
     }
 }

@@ -9,7 +9,7 @@ module.exports = function tagBuilder(options) {
     if (options.tagName === 'a') {
         element.href = options.href;
     }
-    if (options.hasOwnProperty('data')) {
+    if (Object.hasOwnProperty.call(options, 'data')) {
         for (const [key, value] of Object.entries(options.data)) {
             element.setAttribute(`data-${key}`, value);
         }

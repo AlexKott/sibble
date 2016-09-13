@@ -18,7 +18,8 @@ export default class FormRegister {
             });
         });
     }
-    gatherData(form) {
+    // TODO: fix test errors when changing to static method
+    gatherData(form) { // eslint-disable-line
         const formData = new FormData(form);
         const data = {};
         for (const entry of formData) {

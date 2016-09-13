@@ -5,7 +5,7 @@ router.route('/')
     .get((req, res) => {
         postService
             .findAllAndSort('dateCreated')
-            .then(result => {
+            .then((result) => {
                 res.render('posts', { posts: result.data, title: 'Posts' });
             })
             .catch(result => res.render('error', { error: result.error }));

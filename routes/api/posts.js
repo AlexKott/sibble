@@ -5,7 +5,7 @@ router.route('/posts')
     .get((req, res) => {
         postService
             .findAllAndSort('dateCreated')
-            .then(result => {
+            .then((result) => {
                 if (!result.data) {
                     return res.status(204).send();
                 }

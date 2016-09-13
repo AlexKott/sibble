@@ -1,4 +1,4 @@
-module.exports = ENV => {
+module.exports = (ENV) => {
     switch (ENV) {
         case 'production':
             return {

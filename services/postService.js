@@ -104,7 +104,7 @@ module.exports = {
     },
     deleteAll() {
         return new Promise((resolve, reject) => {
-            Post.remove({}, error => {
+            Post.remove({}, (error) => {
                 if (error) {
                     reject({ error });
                 } else {
@@ -115,7 +115,7 @@ module.exports = {
     },
     deleteOne(id) {
         return new Promise((resolve, reject) => {
-            Post.findOneAndRemove({ id }, error => {
+            Post.findOneAndRemove({ id }, (error) => {
                 if (error) {
                     reject({ error });
                 } else {

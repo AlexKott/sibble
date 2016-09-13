@@ -23,6 +23,8 @@ function catchError(e) {
     this.emit('end')
 }
 
+const vendors = ['node_modules/handlebars/dist/handlebars.min.js'];
+
 gulp.task('default', ['js', 'hbs', 'css']);
 
 gulp.task('w', () => {
@@ -52,15 +54,22 @@ gulp.task('js', () => {
         .pipe(livereload());
 });
 
+gulp.task('vendor', () => {
+    return gulp.src(vendors)
+        .pipe(concat('vendor.js'))
+        .pipe(gulp.dest('public'));
+});
+
 gulp.task('hbs', () => {
     return gulp.src('src/hbs/**/*.hbs')
-        .pipe(handlebars())
+        .pipe(handlebars({
+            handlebars: require('handlebars')
+        }))
         .pipe(wrap('Handlebars.template(<%= contents %>)'))
         .pipe(declare({
             namespace: 'App.templates',
             noRedeclare: true,
         }))
-        .pipe(addSrc('node_modules/handlebars/dist/handlebars.min.js'))
         .pipe(concat('templates.js'))
         .pipe(gulp.dest('public'))
         .pipe(livereload());
