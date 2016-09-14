@@ -22,7 +22,7 @@
     "express": "4.14.x",
     "express-handlebars": "3.0.x",
     "handlebars": "4.0.x",
-    "html-element": "1.5.x",
+    "html-element": "2.1.x",
     "lodash": "4.15.x",
     "mongoose": "4.6.x",
     "morgan": "1.7.x",

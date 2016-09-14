@@ -21,6 +21,7 @@ const hbs = exphbs.create({
 });
 const mongoose = require('mongoose');
 const db = mongoose.connection;
+mongoose.Promise = global.Promise;
 mongoose.connect(config.dbUrl);
 
 db.on('error', () => {

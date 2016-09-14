@@ -1,5 +1,5 @@
-require('html-element');
 require('babel-polyfill');
+const document = require('html-element').document;
 
 module.exports = function tagBuilder(options) {
     const element = document.createElement(options.tagName);
