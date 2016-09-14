@@ -39,9 +39,9 @@ describe('Form register', () => {
         handle.appendChild(form);
         formRegister.update();
 
-        sinon.stub(formRegister, 'gatherData');
+        sinon.stub(FormRegister.prototype.constructor, 'gatherData');
         submitButton.click();
 
-        expect(formRegister.gatherData.calledOnce).to.be.true;
+        expect(FormRegister.prototype.constructor.gatherData.calledOnce).to.be.true;
     });
 });

@@ -13,13 +13,12 @@ export default class FormRegister {
             f.addEventListener('submit', (e) => {
                 if (window.FormData) {
                     e.preventDefault();
-                    this.gatherData(f);
+                    FormRegister.gatherData(f);
                 }
             });
         });
     }
-    // TODO: fix test errors when changing to static method
-    gatherData(form) { // eslint-disable-line
+    static gatherData(form) {
         const formData = new FormData(form);
         const data = {};
         for (const entry of formData) {
