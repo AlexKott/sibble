@@ -27,6 +27,6 @@ export default class FormRegister {
         }
         const target = data.api_target;
         delete data.api_target;
-        ajaxService(target, form.method, data);
+        ajaxService.request(target, form.method, data);
     }
 }
