@@ -21,9 +21,9 @@ describe('GET index', () => {
         request.get('/')
             .expect(200)
             .end((err, data) => {
-                assert.equal(data.status, 200);
-                assert.equal(data.type, 'text/html');
-                assert.include(data.text, '<!DOCTYPE html>');
+                assert.equal(data.status, 200, 'Api sends "ok"');
+                assert.equal(data.type, 'text/html', 'Api sends html');
+                assert.include(data.text, '<!DOCTYPE html>', 'Api sends a html page');
                 done();
             });
     });

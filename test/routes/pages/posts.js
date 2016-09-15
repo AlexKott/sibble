@@ -27,9 +27,9 @@ describe('GET posts', () => {
         request.get('/posts')
             .expect(200)
             .end((err, data) => {
-                assert.equal(data.status, 200);
-                assert.include(data.text, newPost.title);
-                assert.include(data.text, newPost2.title);
+                assert.equal(data.status, 200, 'Api sends "ok"');
+                assert.include(data.text, newPost.title, 'Api sends the first title');
+                assert.include(data.text, newPost2.title, 'Api sends the second title');
                 done();
             });
     });
@@ -40,8 +40,8 @@ describe('GET posts', () => {
                 const startIndex = data.text.indexOf('<title>');
                 const endIndex = data.text.indexOf('</title');
                 const titleString = data.text.substring(startIndex, endIndex);
-                assert.equal(data.status, 200);
-                assert.include(titleString, newPost.title);
+                assert.equal(data.status, 200, 'Api sends "ok"');
+                assert.include(titleString, newPost.title, 'Api sends correct post');
                 done();
             });
     });

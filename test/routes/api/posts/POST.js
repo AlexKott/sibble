@@ -76,13 +76,17 @@ describe('POST /api/posts', () => {
                     done();
                 });
         });
-        it('accept invalid data formats', (done) => {
+        it('accepts invalid data formats', (done) => {
             const invalidData = { title: 'testing title', content: 'new content' };
             request.post('/api/posts')
                 .send(invalidData)
                 .expect(201)
                 .end((err, data) => {
-                    assert.equal(data.body.data.attributes.title, invalidData.title);
+                    assert.equal(
+                        data.body.data.attributes.title,
+                        invalidData.title,
+                        'Api accepts data that is not JSON API formatted'
+                    );
                     done();
                 });
         });

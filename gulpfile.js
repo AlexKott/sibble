@@ -25,7 +25,7 @@ function catchError(e) {
 
 const vendors = ['node_modules/handlebars/dist/handlebars.min.js'];
 
-gulp.task('default', ['js', 'hbs', 'css']);
+gulp.task('default', ['js', 'vendor', 'hbs', 'css']);
 
 gulp.task('w', () => {
     livereload.listen();
