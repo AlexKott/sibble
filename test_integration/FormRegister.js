@@ -1,6 +1,6 @@
-const sinon = require('sinon');
 import FormRegister from '../src/js/FormRegister';
 
+const sinon = require('sinon');
 const handle = document.querySelector('#mocha');
 let formRegister;
 

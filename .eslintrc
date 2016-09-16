@@ -7,17 +7,10 @@
         "import/newline-after-import": "off"
     },
     "globals": {
-        "before": true,
-        "beforeEach": true,
-        "after": true,
-        "assert": true,
-        "describe": true,
-        "it": true,
         "__base": true,
-        "request": true,
         "XMLHttpRequest": true,
+        "FormData": true,
         "document": true,
-        "window": true,
-        "FormData": true
+        "window": true
     }
 }

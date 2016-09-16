@@ -1,0 +1,15 @@
+{
+    "rules": {
+        "no-unused-expressions": "off"
+    },
+    "globals": {
+        "describe": true,
+        "it": true,
+        "assert": true,
+        "before": true,
+        "beforeEach": true,
+        "after": true,
+        "afterEach": true,
+        "request": true
+    }
+}
