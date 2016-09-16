@@ -5,6 +5,7 @@ const livereload = require('gulp-livereload');
 const eslint = require('gulp-eslint');
 const mocha = require('gulp-mocha');
 const mochaPhantom = require('gulp-mocha-phantomjs');
+const nightwatch = require('gulp-nightwatch');
 const browserify = require('browserify');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
@@ -94,7 +95,7 @@ gulp.task('lint', () => {
 });
 
 gulp.task('test-unit', () => {
-    return gulp.src('test/**/**/**/*.js')
+    return gulp.src('test_unit/**/**/**/*.js')
         .pipe(mocha({ reporter: 'list' }))
         .once('error', (e) => {
             console.error(e);
@@ -105,18 +106,25 @@ gulp.task('test-unit', () => {
         });;
 });
 
-gulp.task('test-integration', ['compileTests'], () => {
-    return gulp.src('test_phantomjs/test.html')
+gulp.task('test-acc', () => {
+    gulp.src('')
+        .pipe(nightwatch({
+            configFile: 'test_acceptance/config.json',
+        }));
+});
+
+gulp.task('test-int', ['compileTests'], () => {
+    return gulp.src('test_integration/test.html')
         .pipe(mochaPhantom({ reporter: 'list' }));
 });
 
 gulp.task('compileTests', () => {
-    return browserify('test_phantomjs/entry.js', { debug: true })
+    return browserify('test_integration/entry.js', { debug: true })
         .transform("babelify", { presets: ["es2015"] })
         .bundle()
         .on('error', catchError)
         .pipe(source('test.js'))
-        .pipe(gulp.dest('test_phantomjs'));
+        .pipe(gulp.dest('test_integration/build'));
 });
 
 const jsSrc = [
@@ -125,10 +133,10 @@ const jsSrc = [
     'routes/**/*.js',
     'services/**/*.js',
     'test/**/**/**/*.js',
-    '!test/phantomjs/test.js',
     'utils/*.js',
     'src/js/**/*.js',
     '!node_modules',
     '!gulpfile.js',
-    '!public/*.js'
+    '!public/*.js',
+    '!test_integration/build*.js',
 ];
