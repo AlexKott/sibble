@@ -4,10 +4,11 @@ describe('GET posts', () => {
     const newPost = {
         title: 'a testing post',
         dateCreated: '2014-01-20',
+        content: 'test',
     };
     const slug = slugUtil.generateSlug(newPost.title, newPost.dateCreated);
     const newPost2 = Object.assign({}, newPost,
-        { title: 'the testing post for testing posts' });
+        { title: 'the testing post for testing posts', content: 'test2' });
 
     before((done) => {
         request.delete('/api/posts')

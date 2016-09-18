@@ -1,9 +1,10 @@
 const newPost = {
     title: 'test get post',
     dateCreated: '2014-01-20',
+    content: 'test',
 };
 const newPost2 = Object.assign({}, newPost,
-    { title: 'test another get post' });
+    { title: 'test another get post', content: 'test' });
 
 describe('GET /api/posts', () => {
     before((done) => {

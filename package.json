@@ -24,6 +24,7 @@
     "handlebars": "4.0.x",
     "html-element": "2.1.x",
     "lodash": "4.15.x",
+    "marked": "0.3.x",
     "mongoose": "4.6.x",
     "morgan": "1.7.x",
     "remove-accents": "0.3.x"
