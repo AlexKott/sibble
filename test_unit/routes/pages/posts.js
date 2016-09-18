@@ -23,16 +23,6 @@ describe('GET posts', () => {
                     });
             });
     });
-    it('should display a list with all posts', (done) => {
-        request.get('/posts')
-            .expect(200)
-            .end((err, data) => {
-                assert.equal(data.status, 200, 'Api sends "ok"');
-                assert.include(data.text, newPost.title, 'Api sends the first title');
-                assert.include(data.text, newPost2.title, 'Api sends the second title');
-                done();
-            });
-    });
     it('should display a single post', (done) => {
         request.get(`/posts/${slug}`)
             .expect(200)
