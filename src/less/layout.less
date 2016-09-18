@@ -24,7 +24,8 @@ body {
         padding: @mediumGap @bigGap;
     }
     @media @medium {
-        min-height: ~'calc(100% - 2 * @{bigGap})';
+        @doubleBigGap: 2 * @bigGap;
+        min-height: ~'calc(100% - @{doubleBigGap})';
         margin: @bigGap auto;
         padding: @mediumGap @bigGap;
     }
