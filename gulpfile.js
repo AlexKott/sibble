@@ -90,8 +90,7 @@ gulp.task('lint', () => {
     return gulp.src(jsSrc)
         .pipe(eslint())
         .pipe(eslint.format())
-        .pipe(gulpIf(process.env.NODE_ENV === 'production', eslint.failAfterError()))
-        .pipe(livereload());
+        .pipe(gulpIf(process.env.NODE_ENV === 'production', eslint.failAfterError()));
 });
 
 gulp.task('test-unit', () => {
