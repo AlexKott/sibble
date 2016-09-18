@@ -7,7 +7,7 @@ router.route('/')
             .findAllAndSort('dateCreated')
             .then(result => res.render(
                 'posts',
-                { posts: result.data, title: 'Start' }
+                { posts: result.data, title: 'Start', isHome: true }
             ))
             .catch(result => res.render('error', { error: result.error }));
     });

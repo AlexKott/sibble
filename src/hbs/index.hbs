@@ -12,6 +12,11 @@
     <section class="wrapper">
         <h1 class="page-title">{{title}}</h1>
         {{{body}}}
+        {{#unless isHome}}
+            {{#link href='/' className="page-navigation" target="internal"}}
+                Start
+            {{/link}}
+        {{/unless}}
     </section>
 
 <script src="/vendor.js"></script>

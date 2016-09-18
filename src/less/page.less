@@ -1,0 +1,23 @@
+@import 'variables';
+
+.page-title {
+    margin: 0 @baseUnit @smallGap;
+    @media @small {
+        margin: 0 0 @mediumGap;
+    }
+}
+
+.page-navigation {
+    display: block;
+    margin: 0 -@bigGap;
+
+    text-align: center;
+    font-family: @fontSerif;
+    font-weight: 700;
+    font-size: 21px;
+    color: @darkBlue;
+    @media @small {
+        margin: auto;
+        width: 1/2 * @elementMinWidth;
+    }
+}

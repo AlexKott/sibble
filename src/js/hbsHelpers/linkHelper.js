@@ -6,9 +6,11 @@ module.exports = function linkHelper(opts) {
         innerHTML: opts.fn(),
         href: opts.hash.href,
         className: opts.hash.className,
+        cssId: opts.hash.cssId,
         data: {
             target: opts.hash.target,
         },
+        trimWhitespace: true,
     };
     return tagBuilder(options);
 };

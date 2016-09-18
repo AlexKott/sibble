@@ -44,4 +44,13 @@ describe('tag builder', () => {
         const markup = tagBuilder(options);
         assert.equal(markup, '<div data-target="internal" data-test="testing"></div>');
     });
+    it('should trim whitespace if wanted', () => {
+        const options = {
+            tagName: 'span',
+            innerHTML: '   testing whitespace    ',
+            trimWhitespace: true,
+        };
+        const markup = tagBuilder(options);
+        assert.equal(markup, '<span>testing whitespace</span>');
+    });
 });

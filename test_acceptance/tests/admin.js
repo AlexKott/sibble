@@ -1,5 +1,5 @@
 module.exports = {
-    'Can navigate to new post form': (client) => {
+    'User can navigate to new post form': (client) => {
         // execute
         client.url('http://localhost:8080/admin')
             .waitForElementVisible('body', 100)
