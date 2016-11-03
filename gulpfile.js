@@ -17,7 +17,7 @@ const addSrc = require('gulp-add-src');
 const concat = require('gulp-concat');
 const less = require('gulp-less');
 const LessAutoprefix = require('less-plugin-autoprefix');
-const autoprefix = new LessAutoprefix({ browsers: ['last 2 versions'] });
+const autoprefix = new LessAutoprefix({ remove: false, browsers: ['>2%'] });
 
 function catchError(e) {
     console.log(e);
@@ -44,7 +44,7 @@ gulp.task('w', () => {
 
 gulp.task('js', () => {
     return browserify('src/js/app.js', { debug: true })
-        .transform("babelify", { presets: ["es2015"] })
+        .transform('babelify', { presets: ['es2015'] })
         .bundle()
         .on('error', catchError)
         .pipe(source('script.js'))
@@ -119,7 +119,7 @@ gulp.task('test-int', ['compileTests'], () => {
 
 gulp.task('compileTests', () => {
     return browserify('test_integration/entry.js', { debug: true })
-        .transform("babelify", { presets: ["es2015"] })
+        .transform('babelify', { presets: ['es2015'] })
         .bundle()
         .on('error', catchError)
         .pipe(source('test.js'))
